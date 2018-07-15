@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>i-select 控件学习</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="../plugins/styles/iview.css">
+    <link rel="stylesheet" href="../plugins/uikit-2.25.0/css/uikit.min.css">
+    <script type="application/javascript" src="../plugins/vue.js"></script>
+    <script type="application/javascript" src="../plugins/iview.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <br>
+        <!-- (i-select)控件学习 -->
+        <div class="uk-panel uk-panel-box">
+            <h3>单选</h3>
+            <i-select v-model="model1" size="small" style="width:300px" clearable>
+                <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+            </i-select>
+            <span>{{model1}}</span>
+            <i-select v-model="model2" size="default" style="width:300px" clearable>
+                <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+            </i-select>
+            <span>{{model2}}</span>
+            <i-select v-model="model3" size="large" style="width:300px" clearable>
+                <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+            </i-select>
+            <span>{{model3}}</span>
+        </div>
+        <br>
+        <div class="uk-panel uk-panel-box">
+            <h3>多选</h3>
+            <i-select v-model="model10" style="width:500px" placeholder="请选择多个内容" multiple>
+                <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+            </i-select>
+            <span class="uk-text-muted uk-text-large">{{model10}}</span>
+        </div>
+        <br>
+        <div class="uk-panel uk-panel-box">
+            <h3>级联查询</h3>
+            <i-select v-model="model11" size="default" style="width:300px" @on-clear="clearCity" @on-query-change="queryCityChange" placeholder="请选择省分" filterable transfer clearable>
+                <i-option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+            </i-select>
+            <span>{{model11}}</span>
+            <i-select v-model="model12" size="default" style="width:300px" not-found-text="无匹配地市" placeholder="请选择地市" transfer clearable>
+                <i-option v-for="item in countyList[model11]" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+            </i-select>
+            <span>{{model12}}</span>
+        </div>
+    </div>
+    <br>
+    <script>
+    new Vue({
+        el: '#app',
+        data: {
+            cityList: [{
+                    value: '0',
+                    label: '北京'
+                },
+                {
+                    value: '1',
+                    label: '天津'
+                },
+                {
+                    value: '2',
+                    label: '河北'
+                },
+                {
+                    value: '3',
+                    label: '河南'
+                },
+                {
+                    value: '4',
+                    label: '内蒙古'
+                },
+                {
+                    value: '5',
+                    label: '上海'
+                }
+            ],
+            countyList: [
+                [{ value: '01', label: '海淀区' }, { value: '02', label: '西城区' }, { value: '03', label: '平谷区' }, { value: '04', label: '东城区' }, { value: '05', label: '昌平区' }],
+                [{ value: '11', label: '和平区' }, { value: '12', label: '城厢区' }, { value: '13', label: '河北区' }, { value: '14', label: '河东区' }, { value: '15', label: '新华区' }],
+                [{ value: '21', label: '唐山市' }, { value: '22', label: '邯郸市' }, { value: '23', label: '秦皇岛市' }, { value: '24', label: '张家口市' }, { value: '25', label: '承德市' }],
+                [{ value: '31', label: '郑州市' }, { value: '32', label: '开封市' }, { value: '33', label: '平顶山市' }, { value: '34', label: '驻马店市' }, { value: '35', label: '信阳市' }],
+                [{ value: '41', label: '巴彦淖尔' }, { value: '42', label: '赤峰市' }, { value: '43', label: '通辽市' }, { value: '44', label: '乌兰察布' }, { value: '45', label: '锡林郭勒盟' }],
+                [{ value: '51', label: '金山区' }, { value: '52', label: '松江区' }, { value: '53', label: '浦东新区' }, { value: '54', label: '嘉定区' }, { value: '55', label: '宝山区' }]
+            ],
+            model1: '',
+            model2: '',
+            model3: '',
+            model10: [],
+            model11: '',
+            model12: ''
+        },
+        methods: {
+            show: function() {
+                this.visible = true;
+            },
+            clearCity: function() {
+                this.model12 = '';
+            },
+            queryCityChange: function(query) {
+                console.log(query);
+            }
+        }
+    });
+    </script>
+    <script type="application/javascript" src="../plugins/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript" src="../plugins/uikit-2.25.0/js/uikit.min.js"></script>
+</body>
+
+</html>
