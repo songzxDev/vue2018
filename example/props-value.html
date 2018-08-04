@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props 值传递</title>
+    <link type="text/css" rel="stylesheet" href="../plugins/styles/iview.css">
+    <link type="text/css" rel="stylesheet" href="../plugins/uikit-2.25.0/css/uikit.min.css">
+    <style type="text/css" rel="stylesheet">
+
+    </style>
+    <script type="application/javascript" src="../plugins/vue.js"></script>
+    <script type="application/javascript" src="../plugins/iview.js"></script>
+    <script type="application/javascript" src="../plugins/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript" src="../plugins/uikit-2.25.0/js/uikit.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <template>
+        <i-table :data="dataList" :columns="columnList" size="small" @on-expand="showChildren"></i-table>
+    </template>
+</div>
+<script type="application/javascript" charset="UTF-8">
+    let RUBBISH = [{'name': 'Jerry', 'age': 34, 'address': '月球上'}];
+    let app = new Vue({
+        el: '#app',
+        data: {
+            rubbish: [{'name': 'Jerry', 'age': 34, 'address': '月球上'}],
+            columnList: [
+                {
+                    type: 'expand',
+                    width: 50,
+                    render: (h, params) => {
+                        return h('div', {}, [
+                            h('Table', {
+                                props: {
+                                    disabledHover: true,
+                                    data: function () {
+                                        return [{name: new Date().getTime(), age: 15, address: 10000}];
+                                    }(),
+                                    columns: [
+                                        {
+                                            title: 'Name',
+                                            key: 'name'
+                                        },
+                                        {
+                                            title: 'Age',
+                                            key: 'age'
+                                        },
+                                        {
+                                            title: 'Address',
+                                            key: 'address'
+                                        }
+                                    ],
+                                    size: 'small'
+                                }
+                            })
+                        ])
+                    }
+                },
+                {
+                    title: 'Name',
+                    key: 'name'
+                },
+                {
+                    title: 'Age',
+                    key: 'age'
+                },
+                {
+                    title: 'Address',
+                    key: 'address'
+                }
+            ],
+            dataList: [
+                {
+                    name: 'John Brown',
+                    age: 18,
+                    address: 'New York No. 1 Lake Park',
+                    job: 'Data engineer',
+                    interest: 'badminton',
+                    birthday: '1991-05-14',
+                    book: 'Steve Jobs',
+                    movie: 'The Prestige',
+                    music: 'I Cry'
+                },
+                {
+                    name: 'Jim Green',
+                    age: 25,
+                    address: 'London No. 1 Lake Park',
+                    job: 'Data Scientist',
+                    interest: 'volleyball',
+                    birthday: '1989-03-18',
+                    book: 'My Struggle',
+                    movie: 'Roman Holiday',
+                    music: 'My Heart Will Go On'
+                },
+                {
+                    name: 'Joe Black',
+                    age: 30,
+                    address: 'Sydney No. 1 Lake Park',
+                    job: 'Data Product Manager',
+                    interest: 'tennis',
+                    birthday: '1992-01-31',
+                    book: 'Win',
+                    movie: 'Jobs',
+                    music: 'Don’t Cry'
+                },
+                {
+                    name: 'Jon Snow',
+                    age: 26,
+                    address: 'Ottawa No. 2 Lake Park',
+                    job: 'Data Analyst',
+                    interest: 'snooker',
+                    birthday: '1988-7-25',
+                    book: 'A Dream in Red Mansions',
+                    movie: 'A Chinese Ghost Story',
+                    music: 'actor'
+                }
+            ],
+        },
+        methods: {
+            showChildren: function (row, status) {
+
+            }
+        }
+    });
+
+
+    RUBBISH.push({'name': 'Jerry', 'age': 34, 'address': '月球上'});
+
+</script>
+</body>
+</html>
