@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>i-modal 控件学习</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="../plugins/styles/iview.css">
+    <link rel="stylesheet" href="../plugins/uikit-2.25.0/css/uikit.min.css">
+    <link rel="stylesheet" href="../plugins/jsonview/jquery.jsonview.css">
+    <script type="application/javascript" src="../plugins/vue.js"></script>
+    <script type="application/javascript" src="../plugins/iview.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <i-button @click="showDiamond('')">Custom header and footer</i-button>
+    <Modal v-model="modal2" width="720" @on-visible-change="showChangeText" scrollable>
+        <p slot="header" style="color:#f60;text-align:center">
+           <Icon type="ios-star-outline"></Icon>
+            <span>Json信息</span>
+        </p>
+        <div id="diamond">
+        </div>
+        <div slot="footer">
+            <br>
+        </div>
+    </Modal>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            modal2: false,
+            modal_loading: false,
+            modal3: false,
+            modal4: false,
+            modal5: false,
+            diamond: ''
+        },
+        methods: {
+            del: function () {
+                this.modal_loading = true;
+                setTimeout(() => {
+                    this.modal_loading = false;
+                    this.modal2 = false;
+                    this.$Message.success('Successfully delete');
+                }, 2000);
+            },
+            showChangeText: function (status) {
+                if (status) {
+                    console.log('show');
+                } else {
+                    console.log('hidden');
+                }
+            },
+            showDiamond: function (diamondText) {
+                $('div#diamond').html('');
+                $('div#diamond').JSONView(json);
+                this.modal2 = true;
+            }
+        }
+    });
+
+    let json = {
+        "hey": "guy",
+        "anumber": 243,
+        "anobject": {
+            "whoa": "nuts",
+            "anarray": [1, 2, "thr<h1>ee"],
+            "more": "stuff"
+        },
+        "awesome": true,
+        "bogus": false,
+        "meaning": null,
+        "japanese": "明日がある。",
+        "link": "http://jsonview.com",
+        "notLink": "http://jsonview.com is great",
+        "multiline": ['Much like me, you make your way forward,',
+            'Walking with downturned eyes.',
+            'Well, I too kept mine lowered.',
+            'Passer-by, stop here, please.'].join("\n")
+    };
+</script>
+<script type="application/javascript" src="../plugins/jquery-3.3.1.min.js"></script>
+<script type="application/javascript" src="../plugins/jsonview/jquery.jsonview.js"></script>
+<script type="application/javascript" src="../plugins/uikit-2.25.0/js/uikit.min.js"></script>
+</body>
+
+</html>
