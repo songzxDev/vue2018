@@ -98,8 +98,12 @@
                     console.log($('#_target').length);
                     console.log($('#_target').find('.ivu-table-body').find('table').length);
                     let _target = $('#_target').find('.ivu-table-body').find('table');
-                    console.log(_target.find('.ivu-table-row').length);
+                    console.log(_target.find('.ivu-table-row').eq(0));
                     // 注释：rowspan="0" 指示浏览器横跨到表格部分的最后一行（thead、tbody 或者 tfoot）。
+                    _target.find('.ivu-table-row').eq(0).find('td:first').attr('rowspan', 4);
+                    _target.find('.ivu-table-row:gt(0)').each(function(index,element) {
+                        $(element).find('td:eq(0)').attr('style','display:none');
+                    });
                 })
             }
         });
