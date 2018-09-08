@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>i-form 控件</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link type="text/css" rel="stylesheet" href="../plugins/styles/iview.css">
+    <link type="text/css" rel="stylesheet" href="../plugins/uikit-2.25.0/css/uikit.min.css">
+    <style type="text/css">
+
+    </style>
+    <script type="application/javascript" src="../plugins/vue.js"></script>
+    <script type="application/javascript" src="../plugins/iview.js"></script>
+    <script type="application/javascript" src="../plugins/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript" src="../plugins/uikit-2.25.0/js/uikit.min.js"></script>
+</head>
+
+<body>
+<div id="components-demo">
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+</div>
+<script type="application/javascript">
+
+    // 定义一个名为 button-counter 的新组件
+    Vue.component('button-counter', {
+        // 一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    });
+    new Vue({ el: '#components-demo' });
+</script>
+</body>
+
+</html>
